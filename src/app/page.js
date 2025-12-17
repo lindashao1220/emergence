@@ -4,8 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import Carousel from "../components/carousel";
-import VerticalCarousel from "../components/vertical";
+import Carousel from "../components/Carousel";
+import VerticalCarousel from "../components/VerticalCarousel";
 
 export default function Home() {
     return (
