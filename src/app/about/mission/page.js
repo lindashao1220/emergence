@@ -12,7 +12,7 @@ export default function Mission() {
                     <Image src="/logo_white.png" alt="Logo" width={50} height={50} />
                 </div>
                 <nav className="flex space-x-4">
-                    <a href="/" className="hover:text-gray-400">Home</a>
+                    <a href="/" className="hover:text-gray-400">Home家</a>
                     {/* About Dropdown */}
                     <div className="relative group">
                         <a href="#" className="flex items-center space-x-1 hover:text-gray-400">
