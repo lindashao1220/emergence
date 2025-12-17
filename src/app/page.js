@@ -1,147 +1,302 @@
-// "use client";
+"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-
+import Link from "next/link";
+import { motion } from "framer-motion";
 import Carousel from "../components/carousel";
 import VerticalCarousel from "../components/vertical";
 
 export default function Home() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Variants for animations
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+
     return (
-        <div className="bg-black text-white min-h-screen flex flex-col">
-            {/* Fixed Header */}
-            <header className="fixed top-0 left-0 w-full flex justify-between items-center p-6 bg-black z-10">
-                <div className="text-2xl font-bold">
-                    <Image src="/logo_white.png" alt="Logo" width={50} height={50}/>
-                </div>
-                <nav className="flex space-x-4">
-                    {/* About Dropdown */}
-                    <div className="relative group">
-                        <a href="#" className="flex items-center space-x-1 hover:text-gray-400">
-                            <span>About</span>
-                            <span className="text-sm">&#9662;</span> {/* Down arrow */}
-                        </a>
-                        {/* Dropdown Menu */}
-                        <div
-                            className="absolute left-0 top-full mt-2 w-40 bg-black border border-gray-600 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                            <a href="/about/team" className="block px-4 py-2 hover:bg-gray-800 border-b border-gray-600">
-                                Team
-                            </a>
-                            <a href="/about/mission" className="block px-4 py-2 hover:bg-gray-800 border-b border-gray-600">
-                                Mission
-                            </a>
-                            <a href="/about/partners" className="block px-4 py-2 hover:bg-gray-800">
-                                Partners
-                            </a>
+        <div className="bg-brand-black text-white min-h-screen flex flex-col font-sans selection:bg-brand-pink selection:text-white">
+            {/* Transparent Header with Centered Navigation */}
+            <header className="fixed top-0 left-0 w-full z-50 p-6 transition-all duration-300">
+                <div className="max-w-7xl mx-auto flex justify-between items-center relative">
+                    {/* Logo (Top Left or kept as is, but user wanted nav in middle) */}
+                    {/* We keep logo on left but can make it subtle or absolute */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-2xl font-bold"
+                    >
+                        <Link href="/">
+                            <Image src="/logo_white.png" alt="Logo" width={50} height={50} className="hover:scale-110 transition-transform duration-300"/>
+                        </Link>
+                    </motion.div>
+
+                    {/* Centered Navigation */}
+                    <nav className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex space-x-8 items-center">
+                        {/* About Dropdown */}
+                        <div className="relative group">
+                            <button className="flex items-center space-x-1 text-white hover:text-brand-pink transition-colors font-medium">
+                                <span>About</span>
+                                <span className="text-sm transition-transform group-hover:rotate-180">&#9662;</span>
+                            </button>
+                            {/* Dropdown Menu */}
+                            <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-4 w-48 bg-black/90 backdrop-blur-md border border-gray-800 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 visible group-hover:visible transition-all duration-300 shadow-[0_0_15px_rgba(236,72,153,0.3)]">
+                                <Link href="/about/team" className="block px-6 py-3 hover:bg-brand-pink/20 hover:text-brand-pink border-b border-gray-800 transition-colors">
+                                    Team
+                                </Link>
+                                <Link href="/about/mission" className="block px-6 py-3 hover:bg-brand-pink/20 hover:text-brand-pink border-b border-gray-800 transition-colors">
+                                    Mission
+                                </Link>
+                                <Link href="/about/partners" className="block px-6 py-3 hover:bg-brand-pink/20 hover:text-brand-pink transition-colors">
+                                    Partners
+                                </Link>
+                            </div>
                         </div>
 
+                        <Link href="/contact" className="text-white hover:text-brand-pink transition-colors font-medium">
+                            Contact
+                        </Link>
+
+                        <Link href="/projects" className="relative px-6 py-2 rounded-full border border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black transition-all duration-300 font-bold overflow-hidden group">
+                            <span className="relative z-10">Projects</span>
+                            <div className="absolute inset-0 bg-brand-yellow transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                        </Link>
+
+                        <Link href="/recruit" className="relative px-6 py-2 rounded-full border border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white transition-all duration-300 font-bold overflow-hidden group">
+                            <span className="relative z-10">Join Us</span>
+                            <div className="absolute inset-0 bg-brand-pink transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                        </Link>
+                         <Link href="/pkb" className="relative px-6 py-2 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all duration-300 font-bold overflow-hidden group">
+                            <span className="relative z-10">PKB</span>
+                            <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                        </Link>
+                    </nav>
+
+                     {/* Mobile Menu Button (Hamburger) */}
+                    <div className="md:hidden">
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none">
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
+                            </svg>
+                        </button>
                     </div>
-                    <a href="/contact" className="hover:text-gray-400">Contact</a>
-                    <a href="/projects" className="bg-yellow-400 text-black px-4 py-2 rounded-full">Projects</a>
-                    <a href="/recruit" className="bg-blue-600 text-black px-4 py-2 rounded-full">Join Us</a>
-                    <a href="/pkb" className="bg-pink-600 text-white px-4 py-2 rounded-full">PKB</a>
-                </nav>
+                </div>
+
+                {/* Mobile Menu */}
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-t border-gray-800 p-6 flex flex-col space-y-4 shadow-2xl"
+                    >
+                         <Link href="/about/team" className="text-lg text-white hover:text-brand-pink">About</Link>
+                         <Link href="/contact" className="text-lg text-white hover:text-brand-pink">Contact</Link>
+                         <Link href="/projects" className="text-lg text-brand-yellow">Projects</Link>
+                         <Link href="/recruit" className="text-lg text-brand-pink">Join Us</Link>
+                         <Link href="/pkb" className="text-lg text-white">PKB</Link>
+                    </motion.div>
+                )}
             </header>
 
-            {/* Main Content - video */
-            }
-            <main className="pt-[80px]">
-                {/* Section 1 */}
+            <main className="flex-grow">
+                {/* Section 1 - Hero */}
                 <section
-                    className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-cover bg-center relative"
-                    style={{
-                        backgroundImage: `url('/mainpage.png')`,
-                    }}
+                    className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-cover bg-center relative overflow-hidden"
                 >
-                    {/* Dark overlay for better readability */}
-                    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                    {/* Background Image with Parallax-like effect */}
+                    <div className="absolute inset-0 z-0">
+                         <Image
+                            src="/mainpage.png"
+                            alt="Background"
+                            fill
+                            className="object-cover opacity-60"
+                            priority
+                         />
+                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
+                    </div>
 
-                    {/* Text Content */}
-                    <h2 className="relative text-white text-3xl md:text-6xl font-bold max-w-3xl leading-tight">
-                        Developing New Media Art to Reflect on Complex Technologies
-                    </h2>
+                    {/* Animated Text Content */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={staggerContainer}
+                        className="relative z-10 max-w-4xl mx-auto"
+                    >
+                        <motion.h2
+                            variants={fadeInUp}
+                            className="text-4xl md:text-7xl font-extrabold leading-tight mb-6"
+                        >
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                                Developing New Media Art
+                            </span>
+                            <br />
+                            <span className="text-brand-pink">to Reflect on</span>
+                            <br />
+                            <span className="text-brand-yellow">Complex Technologies</span>
+                        </motion.h2>
+
+                        <motion.div
+                            variants={fadeInUp}
+                            className="mt-8 flex justify-center gap-4"
+                        >
+                            <Link href="/projects" className="px-8 py-3 rounded-full bg-brand-pink text-white font-bold text-lg hover:bg-pink-600 transition-all hover:scale-105 shadow-[0_0_20px_rgba(236,72,153,0.5)]">
+                                Explore Work
+                            </Link>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Scroll Indicator */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, y: [0, 10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+                    >
+                        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+                            <div className="w-1 h-3 bg-white rounded-full"></div>
+                        </div>
+                    </motion.div>
                 </section>
 
                 {/* Section 2 - Projects */}
-                <section className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-8">
-                    {/* Left Text Section */}
-                    <div className="lg:w-1/3 text-center lg:text-left space-y-6 mb-8 lg:mb-0 relative">
-                        {/* Center the text */}
-                        <div className="absolute -inset-12 flex flex-col items-center justify-center lg:justify-start">
-                            <h1 className="text-5xl font-bold mb-4"> Current Projects</h1>
-                            <p className="text-lg text-gray-400">Take a look at our projects</p>
-                        </div>
-                        <div className=" left-[-25] top-[-50] bottom-[-50] w-px bg-gray-600"></div>
+                <section className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 md:px-12 py-20 bg-black relative">
+                     {/* Background Elements */}
+                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                        <div className="absolute top-[20%] left-[10%] w-64 h-64 bg-brand-pink/10 rounded-full blur-[100px]"></div>
+                        <div className="absolute bottom-[20%] right-[10%] w-64 h-64 bg-brand-yellow/10 rounded-full blur-[100px]"></div>
                     </div>
 
+                    <div className="container mx-auto flex flex-col lg:flex-row items-center">
+                        {/* Left Text Section */}
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={fadeInUp}
+                            className="lg:w-1/3 text-center lg:text-left mb-12 lg:mb-0 lg:pr-12 relative z-10"
+                        >
+                            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+                                Current <span className="text-brand-yellow">Projects</span>
+                            </h1>
+                            <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+                                Dive into our latest explorations at the intersection of art, science, and technology.
+                            </p>
+                            <div className="hidden lg:block w-24 h-1 bg-brand-pink mb-8"></div>
+                        </motion.div>
 
-                    {/* Vertical White Line Divider */}
-                    <div className="w-[2px] bg-white h-[80%] mx-12 relative z-10"></div>
+
+                        {/* Vertical Line Divider (Desktop) */}
+                        <div className="hidden lg:block w-[1px] bg-gradient-to-b from-transparent via-gray-600 to-transparent h-[400px] mx-8"></div>
 
 
-                    {/* Right Carousel Section */}
-                    <div className="lg:w-2/3">
-                        <Carousel/>
+                        {/* Right Carousel Section */}
+                        <motion.div
+                             initial={{ opacity: 0, x: 50 }}
+                             whileInView={{ opacity: 1, x: 0 }}
+                             viewport={{ once: true }}
+                             transition={{ duration: 0.8 }}
+                             className="lg:w-2/3 w-full relative z-10"
+                        >
+                            <Carousel/>
+                        </motion.div>
                     </div>
                 </section>
 
 
 
                 {/* Section 3 - Mission Vision */}
-                <section
-                    className="min-4 flex lg:flex-row items-center justify-between text-center px-4 lg:px-8 py-8">
-                    {/* Image */}
-                    <div className="w-full lg:w-1/2 flex justify-center items-center">
-                        <Image
-                            src="/logo_white.png"
-                            alt="Logo"
-                            width={500} // Reduced width for a smaller image
-                            height={500}
-                            className="object-contain"
-                        />
-                    </div>
+                <section className="py-24 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+                    <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
+                        {/* Image */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="w-full lg:w-1/2 flex justify-center items-center mb-12 lg:mb-0"
+                        >
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-brand-pink/20 blur-[60px] rounded-full"></div>
+                                <Image
+                                    src="/logo_white.png"
+                                    alt="Logo"
+                                    width={400}
+                                    height={400}
+                                    className="object-contain relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                                />
+                            </div>
+                        </motion.div>
 
-                    {/* Mission & Vision Text */}
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-8 relative">
-                        {/* Horizontal Line Divider */}
-                        <div className="absolute top-1/2 left-0 w-full border-t-2 border-gray-600"></div>
+                        {/* Mission & Vision Text */}
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={staggerContainer}
+                            className="w-full lg:w-1/2 flex flex-col justify-center relative pl-0 lg:pl-12"
+                        >
+                             {/* Horizontal Line Divider */}
+                             <div className="hidden lg:block absolute top-1/2 left-0 w-full border-t border-gray-700"></div>
 
-                        {/* Mission Section */}
-                        <div className="relative z-10">
-                            <h2 className="text-3xl font-bold mb-8">
-                                <span className="pl-2">Mission</span>
-                            </h2>
-                            <p className="text-base text-gray-300 mb-16">
-                                Facilitate an understanding of complex technology that has
-                                been blackboxed.
-                            </p>
-                        </div>
+                            {/* Mission Section */}
+                            <motion.div variants={fadeInUp} className="relative z-10 mb-16 lg:mb-24 bg-black/80 lg:bg-transparent p-6 lg:p-0 rounded-xl">
+                                <h2 className="text-4xl font-bold mb-4 text-brand-pink">
+                                    Mission
+                                </h2>
+                                <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
+                                    Facilitate an understanding of complex technology that has
+                                    been <span className="text-white font-semibold">blackboxed</span>.
+                                </p>
+                            </motion.div>
 
-                        {/*/!* Vertical Line Divider *!/*/}
-                        {/*<div className="absolute left-[-25] top-[-35] bottom-[-5] w-px bg-gray-600"></div>*/}
-
-                        {/* Vision Section */}
-                        <div className="relative z-10">
-                            <p className="text-base text-gray-300 mb-8">
-                                Playful tinkering, experimentation, and collaboration
-                                between different disciplines.
-                            </p>
-                            <h2 className="text-3xl font-bold mb-2">
-                                <span className="pl-2">Vision</span>
-                            </h2>
-                        </div>
+                            {/* Vision Section */}
+                            <motion.div variants={fadeInUp} className="relative z-10 bg-black/80 lg:bg-transparent p-6 lg:p-0 rounded-xl lg:text-right self-end">
+                                <p className="text-xl text-gray-300 mb-4 leading-relaxed max-w-lg ml-auto">
+                                    Playful tinkering, experimentation, and collaboration
+                                    between different disciplines.
+                                </p>
+                                <h2 className="text-4xl font-bold text-brand-yellow">
+                                    Vision
+                                </h2>
+                            </motion.div>
+                        </motion.div>
                     </div>
                 </section>
 
 
                 {/* Section 4 - Events */}
                 <section
-                    className="min-h-screen flex flex-col items-center justify-center text-center px-4">
-                    <h2 className="text-4xl font-bold mb-8">Events</h2>
+                    id="events-section"
+                    className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 bg-black relative"
+                >
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                         <h2 className="text-5xl md:text-6xl font-bold mb-16">
+                            Upcoming <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink to-brand-yellow">Events</span>
+                        </h2>
+                    </motion.div>
+
 
                     {/* Vertical Carousel Component */}
-                    <div className="w-full overflow-visible">
+                    <div className="w-full max-w-6xl overflow-visible">
                         <VerticalCarousel/>
                     </div>
 
@@ -149,55 +304,60 @@ export default function Home() {
 
 
                 {/* Section 5 - Contact */}
-                <footer className="relative text-white py-12 px-4">
-                    {/* Title - Contact Us */}
-                    <h2 className="text-4xl font-bold mb-8 text-center">Contact us</h2>
+                <footer className="relative text-white py-20 px-4 bg-gradient-to-t from-gray-900 to-black">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="max-w-4xl mx-auto text-center"
+                    >
+                        {/* Title - Contact Us */}
+                        <h2 className="text-5xl font-bold mb-8">Contact Us</h2>
+                        <p className="text-gray-400 mb-12 text-lg">Stay updated with our latest projects and events.</p>
 
-                    {/* Newsletter Subscription */}
-                    <div className="flex flex-col items-center gap-6 max-w-3xl mx-auto mb-8">
-                        <form className="flex flex-row gap-4 w-full max-w-md justify-center">
-                            <input
-                                type="email"
-                                id="email"
-                                placeholder="Enter your email"
-                                className="px-4 py-2 text-black rounded-md focus:outline-none w-2/3"
-                            />
-                            <button
-                                type="submit"
-                                className="px-6 py-2 bg-pink-500 text-white rounded-md font-bold hover:bg-pink-600"
-                            >
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
+                        {/* Newsletter Subscription */}
+                        <div className="flex flex-col items-center gap-6 mb-16 w-full">
+                            <form className="flex flex-col md:flex-row gap-4 w-full justify-center items-stretch">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="Enter your email"
+                                    className="px-6 py-3 text-black rounded-full focus:outline-none focus:ring-2 focus:ring-brand-pink w-full md:w-96 transition-all"
+                                />
+                                <button
+                                    type="submit"
+                                    className="px-8 py-3 bg-brand-pink text-white rounded-full font-bold hover:bg-pink-600 transition-all hover:scale-105 shadow-lg shadow-pink-500/30"
+                                >
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
 
-                    {/* Social Media Icons */}
-                    <div className="flex justify-center space-x-6 mb-12">
-                        <a href="https://www.instagram.com/emergencedelft/" target="_blank" rel="noopener noreferrer">
-                            <img src="/insta.png" alt="Instagram" className="w-8 h-8 hover:opacity-80"/>
-                        </a>
-                        {/*<a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">*/}
-                        {/*    <img src="/linkedin.png" alt="LinkedIn" className="w-8 h-8 hover:opacity-80"/>*/}
-                        {/*</a>*/}
-                    </div>
+                        {/* Social Media Icons */}
+                        <div className="flex justify-center space-x-8 mb-16">
+                            <a href="https://www.instagram.com/emergencedelft/" target="_blank" rel="noopener noreferrer" className="group">
+                                <div className="p-3 bg-gray-800 rounded-full group-hover:bg-brand-pink transition-colors duration-300">
+                                     <img src="/insta.png" alt="Instagram" className="w-6 h-6 invert filter group-hover:invert-0"/>
+                                </div>
+                            </a>
+                        </div>
+                    </motion.div>
 
-                    {/* Contact Information (Bottom Right Corner) */}
-                    <div className="absolute bottom-4 right-4 text-right text-gray-300 text-sm">
-                        <p>Emergence Delft</p>
-                        <p>Email: info@emergencedelft.nl</p>
-                        <p>Address: Stevinweg 4, 2628 CN, Delft, The Netherlands</p>
-                    </div>
+                    {/* Contact Information & Logo */}
+                    <div className="container mx-auto border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                        <div className="mb-4 md:mb-0">
+                            <Image src="/logo_white.png" alt="Logo" width={40} height={40} className="opacity-50 hover:opacity-100 transition-opacity"/>
+                        </div>
 
-                    {/* Logo (Centered at Bottom) */}
-                    <div className="absolute bottom-4 left-8 transform -translate-x-1/2">
-                        <img src="/logo_white.png" alt="Logo" className="w-10 h-10"/>
+                        <div className="text-center md:text-right space-y-1">
+                            <p>© {new Date().getFullYear()} Emergence Delft</p>
+                            <p>info@emergencedelft.nl</p>
+                            <p>Stevinweg 4, 2628 CN, Delft, The Netherlands</p>
+                        </div>
                     </div>
                 </footer>
-
             </main>
         </div>
     );
 }
-
-
-
