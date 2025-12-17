@@ -1,106 +1,91 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { Mail } from "lucide-react";
+import { motion } from "framer-motion";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-export default function Contact() {
+// Example recruitment data - matching the contact page structure but for recruitment purposes
+const recruiters = [
+    {
+        name: "Recruitment Team",
+        title: "Join Us",
+        info: "Interested in becoming part of Emergence? We are always looking for new talent.",
+        phone: "",
+        email: "recruit@emergencedelft.nl",
+        label: "Apply Now",
+        image: "/logo_white.png",
+    },
+     // Added a duplicate/placeholder to match the alternating style if needed, or just keep one.
+];
+
+export default function Recruit() {
     return (
-        <div className="bg-black text-white min-h-screen flex flex-col">
-            {/* Fixed Header */}
-            <header className="fixed top-0 left-0 w-full flex justify-between items-center p-6 bg-black z-10">
-                <div className="text-2xl font-bold">
-                    <Image src="/logo_white.png" alt="Logo" width={50} height={50}/>
-                </div>
-                <nav className="flex space-x-4">
-                    <a href="/" className="hover:text-gray-400">Home</a>
-                    {/* About Dropdown */}
-                    <div className="relative group">
-                        <a href="#" className="flex items-center space-x-1 hover:text-gray-400">
-                            <span>About</span>
-                            <span className="text-sm">&#9662;</span> {/* Down arrow */}
-                        </a>
-                        {/* Dropdown Menu */}
-                        <div
-                            className="absolute left-0 top-full mt-2 w-40 bg-black border border-gray-600 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                            <a href="/about/team"
-                               className="block px-4 py-2 hover:bg-gray-800 border-b border-gray-600">
-                                Team
-                            </a>
-                            <a href="/about/mission" className="block px-4 py-2 hover:bg-gray-800">
-                                Mission
-                            </a>
-                        </div>
-                    </div>
-                    <a href="/contact" className="hover:text-gray-400">Contact</a>
-                    <a href="/projects" className="bg-yellow-400 text-black px-4 py-2 rounded-full">Projects</a>
-                    <a href="#" className="bg-pink-600 text-white px-4 py-2 rounded-full">PKB</a>
-                </nav>
-            </header>
+        <div className="bg-black text-white min-h-screen flex flex-col font-sans">
+            <Header />
 
             {/* Main Content */}
-            <main className="pt-[100px] px-8 flex flex-col items-center space-y-12">
-                <h1 className="text-4xl font-bold mb-8">Get in touch with us!</h1>
-                {/* Contact Rows */}
-                <div className="flex flex-col space-y-12 w-full max-w-5xl">
-                    {/* Contact Person 1 */}
-                    <div
-                        className="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-12">
-                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white flex-shrink-0">
-                            <Image src="/logo_white.png" alt="Babette van den Broek" width={128} height={128}/>
-                        </div>
-                        <div className="text-center lg:text-left space-y-2">
-                            <h3 className="text-xl font-bold">Babette van den Broek</h3>
-                            <p className="text-lg text-gray-400">Questions, thoughts, or just want to chat? Our Team
-                                Manager is your go-to person!</p>
-                            <p className="text-lg">📞 +31 6 81895801</p>
-                            <p className="text-lg">✉️ info@emergencedelft.nl</p>
-                        </div>
-                        <div className="bg-gray-800 text-white p-4 rounded-md">
-                            <h4 className="text-xl font-bold">For General Info</h4>
-                        </div>
-                    </div>
+            <main className="flex-grow pt-32 px-6 py-20 flex justify-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full max-w-5xl space-y-24"
+                >
+                    <h1 className="text-5xl font-bold text-center mb-16 text-yellow-400">Join our Team!</h1>
 
-                    {/* Divider */}
-                    <hr className="border-gray-600"/>
+                    {recruiters.map((person, idx) => {
+                         const alignRight = idx % 2 === 1;
+                         return (
+                            <div
+                                key={idx}
+                                className={`flex flex-col items-${alignRight ? "end" : "start"} w-full`}
+                            >
+                                <div className="flex flex-col md:flex-row items-center gap-10">
+                                    <div
+                                        className={`flex flex-col md:flex-row items-center ${
+                                            alignRight ? "md:flex-row-reverse" : ""
+                                        } gap-10 w-full`}
+                                    >
+                                        {/* Image */}
+                                        <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.5)]">
+                                            <Image
+                                                src={person.image}
+                                                alt={person.name}
+                                                width={144}
+                                                height={144}
+                                                className="object-cover w-full h-full"
+                                            />
+                                        </div>
 
-                    {/* Contact Person 2 */}
-                    <div
-                        className="flex flex-col lg:flex-row-reverse items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-12">
-                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white flex-shrink-0">
-                            <Image src="/logo_white.png" alt="Anouk Braakhuis" width={128} height={128}/>
-                        </div>
-                        <div className="text-center lg:text-left space-y-2">
-                            <h3 className="text-xl font-bold">Anouk Braakhuis</h3>
-                            <p className="text-lg text-gray-400">Want to partner up? Get in contact with our
-                                Partnerships Coordinator!</p>
-                            <p className="text-lg">📞 +31 6 38045234</p>
-                            <p className="text-lg">✉️ a.braakhuis@emergencedelft.nl</p>
-                        </div>
-                        <div className="bg-gray-800 text-white p-4 rounded-md">
-                            <h4 className="text-xl font-bold">For Partners</h4>
-                        </div>
-                    </div>
+                                        {/* Text */}
+                                        <div className={`max-w-md ${alignRight ? "md:text-right" : ""}`}>
+                                            <h2 className="text-2xl font-bold text-white">{person.name}</h2>
+                                            <p className="text-yellow-400 italic font-medium">{person.title}</p>
+                                            <p className="text-gray-300 mt-1">{person.info}</p>
 
-                    {/* Divider */}
-                    <hr className="border-gray-600"/>
+                                            {person.email && (
+                                                <p className={`flex items-center gap-2 ${alignRight ? "md:justify-end" : "justify-start"} mt-2`}>
+                                                    <Mail size={18} className="text-pink-500" /> {person.email}
+                                                </p>
+                                            )}
+                                        </div>
 
-                    {/* Contact Person 3 */}
-                    <div
-                        className="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-12">
-                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white flex-shrink-0">
-                            <Image src="/logo_white.png" alt="Rixt Bouman" width={128} height={128}/>
-                        </div>
-                        <div className="text-center lg:text-left space-y-2">
-                            <h3 className="text-xl font-bold">Rixt Bouman</h3>
-                            <p className="text-lg text-gray-400">Any press-related questions or requests? Reach out to
-                                our PR coordinator!</p>
-                            <p className="text-lg">📞 +31 6 29117270</p>
-                            <p className="text-lg">✉️ r.bouman@emergencedelft.nl</p>
-                        </div>
-                        <div className="bg-gray-800 text-white p-4 rounded-md">
-                            <h4 className="text-xl font-bold">For Press</h4>
-                        </div>
-                    </div>
-                </div>
+                                        {/* Box */}
+                                        <div className="w-44 h-44 bg-gray-900/80 rounded-xl flex items-center justify-center shadow-lg border border-gray-700 text-center text-lg font-semibold hover:border-yellow-400 hover:text-yellow-400 transition-colors duration-300">
+                                            {person.label}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </motion.div>
             </main>
+
+            <Footer />
         </div>
     );
 }

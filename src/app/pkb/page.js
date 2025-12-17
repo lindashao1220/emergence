@@ -1,7 +1,12 @@
-import Image from "next/image";
-import ProjectFilter from "@/components/projectfilter";
+"use client";
 
-export default function Projects() {
+import React from "react";
+import { motion } from "framer-motion";
+import ProjectFilter from "@/components/projectfilter";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export default function PKB() {
     const projects = [
         { id: 1, title: "Quantum Art Development", description: "Exploring creativity at the intersection of quantum computing and art.", category: "old", image: "/projects/nm3.png", link: "/projects/newmedia3" },
         { id: 2, title: "Robotics & Arts", description: "Combining robotics and artistic expression to create interactive experiences.", category: "old", image: "/projects/p3.png", link: "/projects/platform3" },
@@ -16,24 +21,21 @@ export default function Projects() {
     ];
 
     return (
-        <div className="bg-black text-white min-h-screen flex flex-col">
-            {/* Fixed Header */}
-            <header className="fixed top-0 left-0 w-full flex justify-between items-center p-6 bg-black z-10">
-                <div className="text-2xl font-bold">
-                    <Image src="/logo_white.png" alt="Logo" width={50} height={50} />
-                </div>
-                <nav className="flex space-x-4">
-                    <a href="/" className="hover:text-gray-400">Home</a>
-                    <a href="/contact" className="hover:text-gray-400">Contact</a>
-                    <a href="/projects" className="bg-yellow-400 text-black px-4 py-2 rounded-full">Projects</a>
-                    <a href="#" className="bg-pink-600 text-white px-4 py-2 rounded-full">PKB</a>
-                </nav>
-            </header>
+        <div className="bg-black text-white min-h-screen flex flex-col font-sans">
+            <Header />
 
             {/* Main Content */}
-            <main className="pt-28 px-8">
-                <ProjectFilter projects={projects} />
+            <main className="flex-grow pt-28 px-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <ProjectFilter projects={projects} />
+                </motion.div>
             </main>
+
+            <Footer />
         </div>
     );
 }

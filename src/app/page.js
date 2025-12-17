@@ -6,10 +6,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Carousel from "../components/carousel";
 import VerticalCarousel from "../components/vertical";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Home() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
     // Variants for animations
     const fadeInUp = {
         hidden: { opacity: 0, y: 50 },
@@ -28,88 +28,7 @@ export default function Home() {
 
     return (
         <div className="bg-brand-black text-white min-h-screen flex flex-col font-sans selection:bg-brand-pink selection:text-white">
-            {/* Transparent Header with Centered Navigation */}
-            <header className="fixed top-0 left-0 w-full z-50 p-6 transition-all duration-300">
-                <div className="max-w-7xl mx-auto flex justify-between items-center relative">
-                    {/* Logo (Top Left or kept as is, but user wanted nav in middle) */}
-                    {/* We keep logo on left but can make it subtle or absolute */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-2xl font-bold"
-                    >
-                        <Link href="/">
-                            <Image src="/logo_white.png" alt="Logo" width={50} height={50} className="hover:scale-110 transition-transform duration-300"/>
-                        </Link>
-                    </motion.div>
-
-                    {/* Centered Navigation */}
-                    <nav className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex space-x-8 items-center">
-                        {/* About Dropdown */}
-                        <div className="relative group">
-                            <button className="flex items-center space-x-1 text-white hover:text-brand-pink transition-colors font-medium">
-                                <span>About</span>
-                                <span className="text-sm transition-transform group-hover:rotate-180">&#9662;</span>
-                            </button>
-                            {/* Dropdown Menu */}
-                            <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-4 w-48 bg-black/90 backdrop-blur-md border border-gray-800 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 visible group-hover:visible transition-all duration-300 shadow-[0_0_15px_rgba(236,72,153,0.3)]">
-                                <Link href="/about/team" className="block px-6 py-3 hover:bg-brand-pink/20 hover:text-brand-pink border-b border-gray-800 transition-colors">
-                                    Team
-                                </Link>
-                                <Link href="/about/mission" className="block px-6 py-3 hover:bg-brand-pink/20 hover:text-brand-pink border-b border-gray-800 transition-colors">
-                                    Mission
-                                </Link>
-                                <Link href="/about/partners" className="block px-6 py-3 hover:bg-brand-pink/20 hover:text-brand-pink transition-colors">
-                                    Partners
-                                </Link>
-                            </div>
-                        </div>
-
-                        <Link href="/contact" className="text-white hover:text-brand-pink transition-colors font-medium">
-                            Contact
-                        </Link>
-
-                        <Link href="/projects" className="relative px-6 py-2 rounded-full border border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black transition-all duration-300 font-bold overflow-hidden group">
-                            <span className="relative z-10">Projects</span>
-                            <div className="absolute inset-0 bg-brand-yellow transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                        </Link>
-
-                        <Link href="/recruit" className="relative px-6 py-2 rounded-full border border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white transition-all duration-300 font-bold overflow-hidden group">
-                            <span className="relative z-10">Join Us</span>
-                            <div className="absolute inset-0 bg-brand-pink transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                        </Link>
-                         <Link href="/pkb" className="relative px-6 py-2 rounded-full border border-white text-white hover:bg-white hover:text-black transition-all duration-300 font-bold overflow-hidden group">
-                            <span className="relative z-10">PKB</span>
-                            <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                        </Link>
-                    </nav>
-
-                     {/* Mobile Menu Button (Hamburger) */}
-                    <div className="md:hidden">
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none">
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Menu */}
-                {isMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-t border-gray-800 p-6 flex flex-col space-y-4 shadow-2xl"
-                    >
-                         <Link href="/about/team" className="text-lg text-white hover:text-brand-pink">About</Link>
-                         <Link href="/contact" className="text-lg text-white hover:text-brand-pink">Contact</Link>
-                         <Link href="/projects" className="text-lg text-brand-yellow">Projects</Link>
-                         <Link href="/recruit" className="text-lg text-brand-pink">Join Us</Link>
-                         <Link href="/pkb" className="text-lg text-white">PKB</Link>
-                    </motion.div>
-                )}
-            </header>
+            <Header />
 
             <main className="flex-grow">
                 {/* Section 1 - Hero */}
@@ -302,61 +221,7 @@ export default function Home() {
 
                 </section>
 
-
-                {/* Section 5 - Contact */}
-                <footer className="relative text-white py-20 px-4 bg-gradient-to-t from-gray-900 to-black">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInUp}
-                        className="max-w-4xl mx-auto text-center"
-                    >
-                        {/* Title - Contact Us */}
-                        <h2 className="text-5xl font-bold mb-8">Contact Us</h2>
-                        <p className="text-gray-400 mb-12 text-lg">Stay updated with our latest projects and events.</p>
-
-                        {/* Newsletter Subscription */}
-                        <div className="flex flex-col items-center gap-6 mb-16 w-full">
-                            <form className="flex flex-col md:flex-row gap-4 w-full justify-center items-stretch">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="Enter your email"
-                                    className="px-6 py-3 text-black rounded-full focus:outline-none focus:ring-2 focus:ring-brand-pink w-full md:w-96 transition-all"
-                                />
-                                <button
-                                    type="submit"
-                                    className="px-8 py-3 bg-brand-pink text-white rounded-full font-bold hover:bg-pink-600 transition-all hover:scale-105 shadow-lg shadow-pink-500/30"
-                                >
-                                    Subscribe
-                                </button>
-                            </form>
-                        </div>
-
-                        {/* Social Media Icons */}
-                        <div className="flex justify-center space-x-8 mb-16">
-                            <a href="https://www.instagram.com/emergencedelft/" target="_blank" rel="noopener noreferrer" className="group">
-                                <div className="p-3 bg-gray-800 rounded-full group-hover:bg-brand-pink transition-colors duration-300">
-                                     <img src="/insta.png" alt="Instagram" className="w-6 h-6 invert filter group-hover:invert-0"/>
-                                </div>
-                            </a>
-                        </div>
-                    </motion.div>
-
-                    {/* Contact Information & Logo */}
-                    <div className="container mx-auto border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                        <div className="mb-4 md:mb-0">
-                            <Image src="/logo_white.png" alt="Logo" width={40} height={40} className="opacity-50 hover:opacity-100 transition-opacity"/>
-                        </div>
-
-                        <div className="text-center md:text-right space-y-1">
-                            <p>© {new Date().getFullYear()} Emergence Delft</p>
-                            <p>info@emergencedelft.nl</p>
-                            <p>Stevinweg 4, 2628 CN, Delft, The Netherlands</p>
-                        </div>
-                    </div>
-                </footer>
+                <Footer />
             </main>
         </div>
     );

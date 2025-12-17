@@ -1,0 +1,24 @@
+
+> emergence@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+ ⚠ Port 3001 is in use, trying 3002 instead.
+   ▲ Next.js 15.1.0 (Turbopack)
+   - Local:        http://localhost:3002
+   - Network:      http://192.168.0.2:3002
+
+ ✓ Starting...
+ ✓ Ready in 1652ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 9.7s
+ GET /contact 200 in 10619ms
+ ○ Compiling /projects/newmedia1 ...
+ ✓ Compiled /projects/newmedia1 in 1857ms
+ GET /projects/newmedia1 200 in 2133ms
+ ✓ Compiled /_not-found/page in 418ms
+ GET /nm1/nm1video.mp4 404 in 479ms
+ ○ Compiling /projects/platform4 ...
+ ✓ Compiled /projects/platform4 in 522ms
+ GET /projects/platform4 200 in 598ms
+ GET /p2/image7.jpg 404 in 465ms
