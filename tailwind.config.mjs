@@ -11,6 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        brand: {
+          pink: "#EC4899", // pink-500
+          yellow: "#FACC15", // yellow-400
+          black: "#000000",
+        }
       },
     },
   },
