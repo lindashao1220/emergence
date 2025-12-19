@@ -25,7 +25,7 @@ export default function Header() {
     >
       <div className="flex justify-center pointer-events-auto px-4">
         <motion.div
-          className="relative flex items-center justify-between bg-black/0 backdrop-blur-md border-pink-500 rounded-full px-6 py-3 shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:shadow-[0_0_25px_rgba(236,72,153,0.5)] transition-shadow duration-300 w-full max-w-5xl"
+          className="relative flex items-center justify-between bg-black/0 backdrop-blur-md border-pink-500 rounded-full px-6 py-3 shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:shadow-[0_0_25px_rgba(236,72,153,0.5)] transition-shadow duration-300 w-full max-w-[200px]"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
