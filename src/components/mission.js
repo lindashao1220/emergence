@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function Mission() {
   return (
@@ -15,7 +16,14 @@ export default function Mission() {
 }
 
 function Card({ title, content, hueA, hueB, i }) {
-  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <motion.div
@@ -25,10 +33,34 @@ function Card({ title, content, hueA, hueB, i }) {
       whileInView="onscreen"
       viewport={{ amount: 0.8 }}
     >
-      <div style={{ ...splash, background }} />
-      <motion.div style={card} variants={cardVariants} className="card">
+      {/* SVG Splash Background */}
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 500 450"
+        preserveAspectRatio="none"
+        style={splash}
+      >
+        <defs>
+          <linearGradient id={`grad-${i}`} x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={hue(hueA)} />
+            <stop offset="100%" stopColor={hue(hueB)} />
+          </linearGradient>
+        </defs>
+        <path
+          d="M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z"
+          fill={`url(#grad-${i})`}
+        />
+      </svg>
+
+      <motion.div
+        style={card}
+        custom={isMobile}
+        variants={cardVariants}
+        className="card relative z-10"
+      >
         <h2 className="text-2xl font-bold mb-4">{title}</h2>
-        <div className="text-sm leading-relaxed overflow-y-auto pr-2 scrollbar-hide text-black">
+        <div className="text-sm leading-relaxed overflow-y-auto pr-2 scrollbar-hide text-black h-full w-full">
           {content}
         </div>
       </motion.div>
@@ -39,16 +71,19 @@ function Card({ title, content, hueA, hueB, i }) {
 const cardVariants = {
   offscreen: {
     y: 300,
+    rotate: 0,
   },
-  onscreen: {
+  onscreen: (isMobile) => ({
     y: 10,
-    rotate: -10,
+    // Reduce rotation on mobile to avoid overflow
+    // Reduce rotation on desktop to accommodate wider cards without excessive vertical shift
+    rotate: isMobile ? -2 : -4,
     transition: {
       type: "spring",
       bounce: 0.4,
       duration: 0.8,
     },
-  },
+  }),
 };
 
 const hue = (h) => `hsl(${h}, 100%, 50%)`;
@@ -61,18 +96,17 @@ const screenWrapper = {
   backgroundColor: "black",
   minHeight: "100vh",
   width: "100%",
-  overflow: "hidden", // Helps contain the margins of children
+  overflow: "hidden",
 };
 
 const container = {
   margin: "160px auto 100px auto",
-  maxWidth: 500,
-  width: "100%",
+  maxWidth: 1200, // Increased to 1200
+  width: "90%",
   backgroundColor: "transparent",
 };
 
 const cardContainer = {
-  overflow: "hidden",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -87,11 +121,12 @@ const splash = {
   left: 0,
   right: 0,
   bottom: 0,
-  clipPath: `path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")`,
+  zIndex: 0,
 };
 
 const card = {
-  width: 360,
+  width: "90%",
+  maxWidth: 1000, // Increased from 700 to 1000
   height: 430,
   display: "flex",
   flexDirection: "column",
