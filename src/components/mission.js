@@ -16,7 +16,7 @@ const images = [
 
 const Slides = () => {
     return (
-        <div className="relative w-full h-screen">
+        <div className="relative w-full h-[calc(100vh-100px)] md:h-screen">
             <Swiper
                 modules={[Pagination, Navigation]}
                 pagination={{ clickable: true }}
@@ -26,12 +26,12 @@ const Slides = () => {
             >
                 {images.map((img, index) => (
                     <SwiperSlide key={index}>
-                        <div className="relative w-full h-screen">
+                        <div className="relative w-full h-full">
                             <Image
                                 src={img.src}
                                 alt={img.alt}
-                                layout="fill"
-                                objectFit="cover"
+                                fill
+                                style={{ objectFit: 'contain' }}
                                 priority
                             />
                         </div>

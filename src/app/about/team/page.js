@@ -8,12 +8,12 @@ export default function Team() {
     return (
         <div className="bg-black text-white min-h-screen flex flex-col font-sans">
             
-            <main className="pt-[100px] px-6 pb-20">
+            <main className="pt-28 px-4 md:px-6 pb-20">
                 <motion.h1 
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-6xl font-black text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-400"
+                    className="text-4xl md:text-6xl font-black text-center mb-10 md:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-400"
                 >
                     Team
                 </motion.h1>
@@ -23,7 +23,7 @@ export default function Team() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="flex flex-col items-center mb-24"
+                    className="flex flex-col items-center mb-16 md:mb-24"
                 >
                     <div className="w-full max-w-5xl relative group">
                         <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-yellow-500 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
@@ -37,7 +37,7 @@ export default function Team() {
                             />
                         </div>
                     </div>
-                    <p className="mt-6 text-2xl font-bold text-gray-300">Emergence 4</p>
+                    <p className="mt-6 text-xl md:text-2xl font-bold text-gray-300">Emergence 4</p>
                 </motion.div>
 
                 {/* Management Section */}

@@ -28,25 +28,25 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="relative z-10 max-w-4xl"
                     >
-                        <h2 className="text-white text-4xl md:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-2xl">
+                        <h2 className="text-white text-3xl md:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-2xl">
                             Developing <span className="text-pink-500">New Media Art</span> to Reflect on <span className="text-yellow-300">Complex Technologies</span>
                         </h2>
                     </motion.div>
                 </section>
 
                 {/* Section 2 - Projects */}
-                <section className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-8 py-20 bg-black">
+                <section className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 lg:px-8 py-20 bg-black">
                     <motion.div 
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="lg:w-1/3 text-center lg:text-left space-y-6 mb-8 lg:mb-0 relative"
+                        className="lg:w-1/3 text-center lg:text-left space-y-6 mb-8 lg:mb-0 relative w-full"
                     >
                         <div className="flex flex-col items-center lg:items-start">
-                            <h1 className="text-6xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-400">
+                            <h1 className="text-5xl lg:text-6xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-400">
                                 Current Projects
                             </h1>
-                            <p className="text-xl text-gray-400">Explore our latest innovations and installations.</p>
+                            <p className="text-lg lg:text-xl text-gray-400">Explore our latest innovations and installations.</p>
                         </div>
                     </motion.div>
 
@@ -145,16 +145,16 @@ export default function Home() {
                         <h2 className="text-5xl font-bold mb-10">Contact Us</h2>
 
                         <div className="flex flex-col items-center gap-6 max-w-xl mx-auto mb-12">
-                            <form className="flex flex-row gap-4 w-full justify-center">
+                            <form className="flex flex-col sm:flex-row gap-4 w-full justify-center">
                                 <input
                                     type="email"
                                     id="email"
                                     placeholder="Enter your email"
-                                    className="px-6 py-3 text-black rounded-full focus:outline-none w-2/3 bg-gray-100 border-2 border-transparent focus:border-pink-500 transition-colors"
+                                    className="px-6 py-3 text-black rounded-full focus:outline-none w-full sm:w-2/3 bg-gray-100 border-2 border-transparent focus:border-pink-500 transition-colors"
                                 />
                                 <button
                                     type="submit"
-                                    className="px-8 py-3 bg-pink-600 text-white rounded-full font-bold hover:bg-pink-500 transition-all hover:scale-105 shadow-[0_0_15px_rgba(236,72,153,0.5)]"
+                                    className="px-8 py-3 bg-pink-600 text-white rounded-full font-bold hover:bg-pink-500 transition-all hover:scale-105 shadow-[0_0_15px_rgba(236,72,153,0.5)] w-full sm:w-auto"
                                 >
                                     Subscribe
                                 </button>

@@ -18,7 +18,7 @@ export default function Projects() {
     return (
         <div className="bg-black text-white min-h-screen flex flex-col">
 
-            <main className="pt-28 px-8">
+            <main className="pt-28 px-4 md:px-8">
                 <ProjectFilter projects={projects} />
             </main>
         </div>
