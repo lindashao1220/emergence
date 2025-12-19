@@ -57,6 +57,7 @@ export default function Header() {
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-40 bg-black/90 border border-pink-500/30 rounded-xl overflow-hidden backdrop-blur-md shadow-xl"
                   >
                     <div className="py-1">
