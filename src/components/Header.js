@@ -63,7 +63,7 @@ export default function Header() {
                       <Link href="/about/team" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
                         Team
                       </Link>
-                      <Link href="/about/mission" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
+                      <Link href="/#mission" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
                         Mission
                       </Link>
                       <Link href="/about/partners" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
@@ -114,7 +114,7 @@ export default function Header() {
                  <div className="flex flex-col space-y-2">
                     <p className="text-pink-400 font-bold border-b border-gray-700 pb-2 mb-2">About</p>
                     <Link href="/about/team" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Team</Link>
-                    <Link href="/about/mission" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Mission</Link>
+                    <Link href="/#mission" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Mission</Link>
                     <Link href="/about/partners" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Partners</Link>
                  </div>
                  
