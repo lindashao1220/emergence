@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 
 export default function ScrollTriggered() {
   return (
-    <div style={container}>
-      {cards.map((card, i) => (
-        <Card key={card.title} i={i} {...card} />
-      ))}
+    <div style={screenWrapper}>
+      <div style={container}>
+        {cards.map((card, i) => (
+          <Card key={card.title} i={i} {...card} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -55,10 +57,18 @@ const hue = (h) => `hsl(${h}, 100%, 50%)`;
  * ==============   Styles   ================
  */
 
+const screenWrapper = {
+  backgroundColor: "black",
+  minHeight: "100vh",
+  width: "100%",
+  overflow: "hidden", // Helps contain the margins of children
+};
+
 const container = {
-  margin: "160px auto 100px auto", // Increased top margin
+  margin: "160px auto 100px auto",
   maxWidth: 500,
   width: "100%",
+  backgroundColor: "transparent",
 };
 
 const cardContainer = {
