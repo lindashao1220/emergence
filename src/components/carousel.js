@@ -24,22 +24,32 @@ export default function Carousel() {
             navigation={true}
             modules={[Navigation]}
             spaceBetween={20}
-            slidesPerView={2.5}
+            slidesPerView={1.2}
+            breakpoints={{
+                640: {
+                    slidesPerView: 1.5,
+                },
+                768: {
+                    slidesPerView: 2.5,
+                },
+            }}
             className="mySwiper"
         >
             {projects.map((project) => (
                 <SwiperSlide key={project.id}>
                     <Link href={project.link}>
-                        <div className="relative group cursor-pointer">
+                        <div className="relative group cursor-pointer overflow-hidden rounded-lg">
                             {/* Image */}
-                            <img
-                                src={project.src}
-                                alt={project.alt}
-                                className="rounded-lg object-cover w-[300px] h-[450px] shadow-md mx-auto"
-                            />
+                            <div className="aspect-[2/3] w-full relative">
+                                <img
+                                    src={project.src}
+                                    alt={project.alt}
+                                    className="object-cover w-full h-full shadow-md"
+                                />
+                            </div>
 
                             {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 text-center">
                                 <span className="text-white text-lg font-semibold">{project.name}</span>
                             </div>
                         </div>

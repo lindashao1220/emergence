@@ -1,39 +1,171 @@
-import React from "react";
-import Image from "next/image";
+"use client";
 
-import Slides from "@/components/mission";
+import { motion } from "framer-motion";
 
-export default function Mission() {
-    return (
-        <div className="bg-black text-white min-h-screen flex flex-col">
-            {/* Fixed Header */}
-            <header className="fixed top-0 left-0 w-full flex justify-between items-center p-6 bg-black z-10">
-                <div className="text-2xl font-bold">
-                    <Image src="/logo_white.png" alt="Logo" width={50} height={50} />
-                </div>
-                <nav className="flex space-x-4">
-                    <a href="/" className="hover:text-gray-400"></a>
-                    {/* About Dropdown */}
-                    <div className="relative group">
-                        <a href="#" className="flex items-center space-x-1 hover:text-gray-400">
-                            <span>About</span>
-                            <span className="text-sm">&#9662;</span>
-                        </a>
-                        <div className="absolute left-0 top-full mt-2 w-40 bg-black border border-gray-600 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                            <a href="/about/team" className="block px-4 py-2 hover:bg-gray-800 border-b border-gray-600">Team</a>
-                            <a href="/about/mission" className="block px-4 py-2 hover:bg-gray-800">Mission</a>
-                        </div>
-                    </div>
-                    <a href="/contact" className="hover:text-gray-400">Contact</a>
-                    <a href="/projects" className="bg-yellow-400 text-black px-4 py-2 rounded-full">Projects</a>
-                    <a href="#" className="bg-pink-600 text-white px-4 py-2 rounded-full">PKB</a>
-                </nav>
-            </header>
-
-            {/* Main Content */}
-            <main className="pt-[100px] flex flex-col items-center justify-center min-h-screen w-full">
-                <Slides />
-            </main>
-        </div>
-    );
+export default function ScrollTriggered() {
+  return (
+    <div style={container}>
+      {cards.map((card, i) => (
+        <Card key={card.title} i={i} {...card} />
+      ))}
+    </div>
+  );
 }
+
+function Card({ title, content, hueA, hueB, i }) {
+  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
+
+  return (
+    <motion.div
+      className={`card-container-${i}`}
+      style={cardContainer}
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ amount: 0.8 }}
+    >
+      <div style={{ ...splash, background }} />
+      <motion.div style={card} variants={cardVariants} className="card">
+        <h2 className="text-2xl font-bold mb-4">{title}</h2>
+        <div className="text-sm leading-relaxed overflow-y-auto pr-2 scrollbar-hide">
+          {content}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const cardVariants = {
+  offscreen: {
+    y: 300,
+  },
+  onscreen: {
+    y: 50,
+    rotate: -10,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8,
+    },
+  },
+};
+
+const hue = (h) => `hsl(${h}, 100%, 50%)`;
+
+/**
+ * ==============   Styles   ================
+ */
+
+const container = {
+  margin: "100px auto",
+  maxWidth: 500,
+  paddingBottom: 100,
+  width: "100%",
+};
+
+const cardContainer = {
+  overflow: "hidden",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "relative",
+  paddingTop: 20,
+  marginBottom: -120,
+};
+
+const splash = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  clipPath: `path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")`,
+};
+
+const card = {
+  width: 300,
+  height: 430,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
+  borderRadius: 20,
+  background: "#f5f5f5",
+  boxShadow:
+    "0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075), 0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075), 0 0 16px hsl(0deg 0% 0% / 0.075)",
+  transformOrigin: "10% 60%",
+  padding: "40px 20px",
+  color: "#000",
+};
+
+/**
+ * ==============   Data   ================
+ */
+
+const cards = [
+  {
+    title: "WHY?",
+    content: (
+      <>
+        <p>
+          As technology advances, its inner workings become increasingly
+          difficult to comprehend. Our artworks do more than facilitate in the
+          understanding of the technology; they are made to inspire and spark
+          dialogue which enables reflection on potential opportunities and
+          issues of technologies in our digital society.
+        </p>
+      </>
+    ),
+    hueA: 340,
+    hueB: 10,
+  },
+  {
+    title: "HOW?",
+    content: (
+      <>
+        <p className="mb-2">
+          We bring artists and engineers together in Emergence Delft, an
+          interdisciplinary research and development team consisting of students
+          from the TU Delft and nearby art schools like the Royal Academy of Art
+          in The Hague. Through this structure, we explore the untapped
+          potential in the intersection of their fields.
+        </p>
+        <p className="mb-2">
+          For a semester, we voluntarily commit part- or fulltime to our Dream
+          Team. The New Media Project adopts a mission-driven focus, following
+          the traditional Dream Team approach, while the Platform Project is
+          taking a curiosity-driven focus. The Operations department forms the
+          backbone of the Dream Team, while the Management department provides
+          oversight and guidance to the rest of the team.
+        </p>
+        <p>
+          To test and expand our knowledge we are in close contact with
+          established artists, institutes, and/or professionals.
+        </p>
+      </>
+    ),
+    hueA: 205,
+    hueB: 245,
+  },
+  {
+    title: "WHAT?",
+    content: (
+      <>
+        <p className="mb-2">We are dedicated to create new media art.</p>
+        <p className="mb-2">
+          We pursue this through two projects: the Platform Project and the New
+          Media Project. Each project serves as a communication form for certain
+          elements of a complex technology, This gives the people the
+          opportunity to reflect on it. In addition to the two projects, we
+          document findings, methods, and theories encountered during our
+          research in our Public Knowledge Bank.
+        </p>
+        <p>
+          To expand our reach we showcase our projects at our own events and we
+          participate in relevant competitions and exhibitions.
+        </p>
+      </>
+    ),
+    hueA: 60,
+    hueB: 90,
+  },
+];
