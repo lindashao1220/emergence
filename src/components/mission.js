@@ -1,86 +1,178 @@
 "use client";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
+import { motion } from "framer-motion";
 
-const slidesData = [
-    {
-        title: "WHY?",
-        color: "text-pink-500",
-        content: (
-            <>
-                <p className="mb-4">
-                    As technology advances, its inner workings become increasingly difficult to comprehend. Our artworks do more than facilitate in the understanding of the technology; they are made to inspire and spark dialogue which enables reflection on potential opportunities and issues of technologies in our digital society.
-                </p>
-            </>
-        )
-    },
-    {
-        title: "HOW?",
-        color: "text-yellow-400",
-        content: (
-            <>
-                <p className="mb-4">
-                    We bring artists and engineers together in Emergence Delft, an interdisciplinary research and development team consisting of students from the TU Delft and nearby art schools like the Royal Academy of Art in The Hague. Through this structure, we explore the untapped potential in the intersection of their fields.
-                </p>
-                <p className="mb-4">
-                    For a semester, we voluntarily commit part- or fulltime to our Dream Team. The New Media Project adopts a mission-driven focus, following the traditional Dream Team approach, while the Platform Project is taking a curiosity-driven focus. The Operations department forms the backbone of the Dream Team, while the Management department provides oversight and guidance to the rest of the team.
-                </p>
-                <p>
-                    To test and expand our knowledge we are in close contact with established artists, institutes, and/or professionals.
-                </p>
-            </>
-        )
-    },
-    {
-        title: "WHAT?",
-        color: "text-pink-500",
-        content: (
-            <>
-                <p className="mb-4">
-                    We are dedicated to create new media art.
-                </p>
-                <p className="mb-4">
-                    We pursue this through two projects: the Platform Project and the New Media Project. Each project serves as a communication form for certain elements of a complex technology, This gives the people the opportunity to reflect on it. In addition to the two projects, we document findings, methods, and theories encountered during our research in our Public Knowledge Bank.
-                </p>
-                <p>
-                    To expand our reach we showcase our projects at our own events and we participate in relevant competitions and exhibitions.
-                </p>
-            </>
-        )
-    }
-];
+export default function Mission() {
+  return (
+    <div id="mission" style={screenWrapper}>
+      <div style={container}>
+        {cards.map((card, i) => (
+          <Card key={card.title} i={i} {...card} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
-const Slides = () => {
-    return (
-        <div className="relative w-full h-[calc(100vh-100px)] md:h-screen flex items-center justify-center">
-            <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation
-                className="w-full h-full max-w-6xl"
-                slidesPerView={1}
-                spaceBetween={50}
-            >
-                {slidesData.map((slide, index) => (
-                    <SwiperSlide key={index} className="flex items-center justify-center p-4 md:p-12">
-                        <div className="w-full h-full flex flex-col justify-center items-center text-center bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-3xl p-8 md:p-16 shadow-2xl">
-                            <h2 className={`text-6xl md:text-8xl font-black mb-8 md:mb-12 ${slide.color}`}>
-                                {slide.title}
-                            </h2>
-                            <div className="text-lg md:text-2xl text-gray-200 leading-relaxed max-w-4xl text-left md:text-center overflow-y-auto max-h-[60vh] md:max-h-none pr-2 md:pr-0 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
-                                {slide.content}
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+function Card({ title, content, hueA, hueB, i }) {
+  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
+
+  return (
+    <motion.div
+      className={`card-container-${i}`}
+      style={cardContainer}
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ amount: 0.8 }}
+    >
+      <div style={{ ...splash, background }} />
+      <motion.div style={card} variants={cardVariants} className="card">
+        <h2 className="text-2xl font-bold mb-4">{title}</h2>
+        <div className="text-sm leading-relaxed overflow-y-auto pr-2 scrollbar-hide text-black">
+          {content}
         </div>
-    );
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const cardVariants = {
+  offscreen: {
+    y: 300,
+  },
+  onscreen: {
+    y: 10,
+    rotate: -10,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8,
+    },
+  },
 };
 
-export default Slides;
+const hue = (h) => `hsl(${h}, 100%, 50%)`;
+
+/**
+ * ==============   Styles   ================
+ */
+
+const screenWrapper = {
+  backgroundColor: "black",
+  minHeight: "100vh",
+  width: "100%",
+  overflow: "hidden", // Helps contain the margins of children
+};
+
+const container = {
+  margin: "160px auto 100px auto",
+  maxWidth: 500,
+  width: "100%",
+  backgroundColor: "transparent",
+};
+
+const cardContainer = {
+  overflow: "hidden",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "relative",
+  paddingTop: 20,
+  marginBottom: -60,
+};
+
+const splash = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  clipPath: `path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")`,
+};
+
+const card = {
+  width: 360,
+  height: 430,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
+  borderRadius: 20,
+  background: "#f5f5f5",
+  boxShadow:
+    "0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075), 0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075), 0 0 16px hsl(0deg 0% 0% / 0.075)",
+  transformOrigin: "10% 60%",
+  padding: "40px 20px",
+  color: "#000",
+};
+
+/**
+ * ==============   Data   ================
+ */
+
+const cards = [
+  {
+    title: "WHY?",
+    content: (
+      <>
+        <p>
+          As technology advances, its inner workings become increasingly
+          difficult to comprehend. Our artworks do more than facilitate in the
+          understanding of the technology; they are made to inspire and spark
+          dialogue which enables reflection on potential opportunities and
+          issues of technologies in our digital society.
+        </p>
+      </>
+    ),
+    hueA: 340,
+    hueB: 10,
+  },
+  {
+    title: "HOW?",
+    content: (
+      <>
+        <p className="mb-2">
+          We bring artists and engineers together in Emergence Delft, an
+          interdisciplinary research and development team consisting of students
+          from the TU Delft and nearby art schools like the Royal Academy of Art
+          in The Hague. Through this structure, we explore the untapped
+          potential in the intersection of their fields.
+        </p>
+        <p className="mb-2">
+          For a semester, we voluntarily commit part- or fulltime to our Dream
+          Team. The New Media Project adopts a mission-driven focus, following
+          the traditional Dream Team approach, while the Platform Project is
+          taking a curiosity-driven focus. The Operations department forms the
+          backbone of the Dream Team, while the Management department provides
+          oversight and guidance to the rest of the team.
+        </p>
+        <p>
+          To test and expand our knowledge we are in close contact with
+          established artists, institutes, and/or professionals.
+        </p>
+      </>
+    ),
+    hueA: 205,
+    hueB: 245,
+  },
+  {
+    title: "WHAT?",
+    content: (
+      <>
+        <p className="mb-2">We are dedicated to create new media art.</p>
+        <p className="mb-2">
+          We pursue this through two projects: the Platform Project and the New
+          Media Project. Each project serves as a communication form for certain
+          elements of a complex technology, This gives the people the opportunity to reflect on it. In addition to the two projects, we document findings, methods, and theories encountered during our
+          research in our Public Knowledge Bank.
+        </p>
+        <p>
+          To expand our reach we showcase our projects at our own events and we
+          participate in relevant competitions and exhibitions.
+        </p>
+      </>
+    ),
+    hueA: 60,
+    hueB: 90,
+  },
+];
