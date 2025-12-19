@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import Carousel from "../components/carousel";
 import VerticalCarousel from "../components/VerticalCarousel";
+import Mission from "../components/mission";
 
 export default function Home() {
     return (
@@ -63,53 +64,7 @@ export default function Home() {
                 </section>
 
                 {/* Section 3 - Mission Vision */}
-                <section className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 lg:px-16 py-20 bg-gradient-to-b from-black to-zinc-900">
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
-                        className="w-full lg:w-1/2 flex justify-center items-center mb-12 lg:mb-0"
-                    >
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-pink-500/20 blur-[100px] rounded-full"></div>
-                            <Image
-                                src="/logo_white.png"
-                                alt="Logo"
-                                width={400} 
-                                height={400}
-                                className="object-contain relative z-10"
-                            />
-                        </div>
-                    </motion.div>
-
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-16 relative">
-                         <div className="absolute top-1/2 left-0 w-full border-t border-gray-700 hidden lg:block"></div>
-
-                        <motion.div 
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative z-10 bg-black/50 backdrop-blur-sm p-6 rounded-2xl border border-pink-500/20"
-                        >
-                            <h2 className="text-4xl font-bold mb-4 text-pink-500">Mission</h2>
-                            <p className="text-lg text-gray-300">
-                                Facilitate an understanding of complex technology that has been blackboxed through artistic expression.
-                            </p>
-                        </motion.div>
-
-                        <motion.div 
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="relative z-10 bg-black/50 backdrop-blur-sm p-6 rounded-2xl border border-yellow-400/20 text-right self-end lg:self-auto"
-                        >
-                             <p className="text-lg text-gray-300 mb-4">
-                                Playful tinkering, experimentation, and collaboration between different disciplines to create meaningful experiences.
-                            </p>
-                            <h2 className="text-4xl font-bold text-yellow-400">Vision</h2>
-                        </motion.div>
-                    </div>
-                </section>
+                <Mission />
 
                 {/* Section 4 - Events */}
                 <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-black py-20 relative overflow-hidden">
