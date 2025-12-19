@@ -6,12 +6,12 @@ export default function About() {
         <div className="bg-black text-white min-h-screen flex flex-col">
 
             {/* Main Content */}
-            <main className="pt-[80px] px-6">
-                <h1 className="text-5xl font-bold text-center mb-12">Partners</h1>
+            <main className="pt-28 px-4 md:px-6">
+                <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">Partners</h1>
 
                 {/* Management Section */}
                 <section className="mb-16">
-                    <h2 className="text-2xl font-semibold text-center mb-16">Emergence Delft aims to bring engineers, designers and artists together and create interactive installations to reflect on our evermore digital society. Our partners are essential to achieve this. They offer us knowledge, opportunities, experience, materials, financial resources, and more.
+                    <h2 className="text-lg md:text-2xl font-semibold text-center mb-16 max-w-4xl mx-auto">Emergence Delft aims to bring engineers, designers and artists together and create interactive installations to reflect on our evermore digital society. Our partners are essential to achieve this. They offer us knowledge, opportunities, experience, materials, financial resources, and more.
                     </h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         <div className="flex flex-col items-center">

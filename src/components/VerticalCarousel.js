@@ -63,14 +63,14 @@ export default function VerticalCarousel() {
                         { id: 3, src: "/em3.png", alt: "EM3 Event", date: "30-01-2025", name: "EM3 Event" },
                     ].map((event) => (
                         <SwiperSlide key={event.id} className="relative">
-                            <div className="flex justify-between items-center w-full px-16">
-                                <div className="text-gray-300 text-xl font-semibold w-1/6 text-right">
+                            <div className="flex flex-col md:flex-row justify-center md:justify-between items-center w-full px-4 md:px-16 gap-4 md:gap-8">
+                                <div className="text-gray-300 text-lg md:text-xl font-semibold w-full md:w-1/6 text-center md:text-right">
                                     {event.date}
                                 </div>
-                                <div className=" overflow-hidden relative flex items-center justify-center" style={{ width: "500px", height: "300px" }}>
+                                <div className="overflow-hidden relative flex items-center justify-center w-full max-w-[500px] h-[200px] md:h-[300px]">
                                     <img src={event.src} alt={event.alt} className="rounded-lg object-contain w-full h-full"/>
                                 </div>
-                                <div className="text-gray-300 text-xl font-semibold w-1/6 text-left">
+                                <div className="text-gray-300 text-lg md:text-xl font-semibold w-full md:w-1/6 text-center md:text-left">
                                     {event.name}
                                 </div>
                             </div>
