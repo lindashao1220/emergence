@@ -1,0 +1,21 @@
+
+> emergence@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.1.0 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+
+ ✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+ ✓ Ready in 1109ms
+ ○ Compiling / ...
+ ✓ Compiled / in 8.7s
+ GET / 200 in 9842ms
+ ✓ Compiled /_not-found/page in 286ms
+ GET /teampics/emergers/logo_white.png 404 in 333ms
+ ⨯ The requested resource isn't a valid image for /teampics/emergers/logo_white.png received text/html; charset=utf-8
