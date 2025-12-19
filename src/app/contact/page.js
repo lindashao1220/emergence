@@ -83,6 +83,7 @@
                 <main className="pt-32 px-4 md:px-6 py-20 flex justify-center">
                     <div className="w-full max-w-5xl space-y-16 md:space-y-24">
                         <h1 className="text-3xl md:text-5xl font-bold text-center mb-10 md:mb-16">Get in touch with us!</h1>
+                        
 
                         {contacts.map((person, idx) => {
                             const alignRight = idx % 2 === 1;
