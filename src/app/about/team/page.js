@@ -1,10 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Team() {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <div className="bg-black text-white min-h-screen flex flex-col font-sans">
             
@@ -64,144 +67,165 @@ export default function Team() {
                     </div>
                 </section>
 
-                {/* Operations Section */}
-                <section className="mb-24">
-                    <motion.h2 
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-3xl font-bold text-center mb-12 text-yellow-400"
+                <div className="flex justify-center mb-12">
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="text-pink-500 hover:text-pink-400 transition-colors animate-bounce focus:outline-none"
                     >
-                        Operations
-                    </motion.h2>
+                        {isExpanded ? <ChevronUp size={48} /> : <ChevronDown size={48} />}
+                    </button>
+                </div>
 
-                    {/* Row 1 */}
-                    <div className="flex flex-wrap justify-center gap-12 mb-12">
-                        {[
-                            { name: "Anouk Braakhuis", role: "Partnerships", img: "anouk.jpg" },
-                            { name: "Laurens Sprenger", role: "Partnerships & PR", img: "laurens.jpg" },
-                            { name: "Fleur Hagen", role: "Public Relations", img: "fleur.jpg" },
-                            { name: "Liza Verdonk", role: "Graphic Design", img: "liza.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
+                <AnimatePresence>
+                    {isExpanded && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="overflow-hidden"
+                        >
+                            {/* Operations Section */}
+                            <section className="mb-24">
+                                <motion.h2 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="text-3xl font-bold text-center mb-12 text-yellow-400"
+                                >
+                                    Operations
+                                </motion.h2>
 
-                    {/* Row 2 */}
-                    <div className="flex flex-wrap justify-center gap-12 mb-12">
-                        {[
-                            { name: "Pauline Sluijs", role: "Curator of Events", img: "pau.jpg" },
-                            { name: "Louison Jacoby", role: "Event Designer", img: "louison.jpg" },
-                            { name: "Tom Hoevers", role: "Scalability", img: "tom.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
+                                {/* Row 1 */}
+                                <div className="flex flex-wrap justify-center gap-12 mb-12">
+                                    {[
+                                        { name: "Anouk Braakhuis", role: "Partnerships", img: "anouk.jpg" },
+                                        { name: "Laurens Sprenger", role: "Partnerships & PR", img: "laurens.jpg" },
+                                        { name: "Fleur Hagen", role: "Public Relations", img: "fleur.jpg" },
+                                        { name: "Liza Verdonk", role: "Graphic Design", img: "liza.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
 
-
-                    {/* Row 3 */}
-                    <div className="flex flex-wrap justify-center gap-12">
-                        {[
-                            { name: "Aaron Dantuma", role: "Osaka Producer", img: "aron.jpg" },
-                            { name: "Wouter Schuit", role: "Osaka Curator", img: "wouter.jpg" },
-                            { name: "Famke Gerritsen", role: "Osaka Programmer", img: "famke.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
-                </section>
-
-
-                {/* New Media Section */}
-                <section className="mb-24">
-                    <motion.h2 
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-3xl font-bold text-center mb-12 text-pink-500"
-                    >
-                        New Media
-                    </motion.h2>
-
-                    {/* Row 1 */}
-                    <div className="flex flex-wrap justify-center gap-12 mb-12">
-                        {[
-                            { name: "Nora Donders", role: "Chief Fabrication", img: "nora.jpg" },
-                            { name: "Floor van Heist", role: "Mechanical Engineer", img: "floor.jpg" },
-                            { name: "Jeroen Wesselingh", role: "Mechanical Engineer", img: "jeron.jpg" },
-                            { name: "Jochem Broshuis", role: "Embedded Engineer", img: "jochem.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
-
-                    {/* Row 2 */}
-                    <div className="flex flex-wrap justify-center gap-12 mb-12">
-                        {[
-                            { name: "Emilie Benneker", role: "Chief Concept", img: "emily.jpg" },
-                            { name: "Tamar Hollman", role: "Concept Designer", img: "tamar.jpg" },
-                            { name: "Davide Forlani", role: "Concept Artist", img: "davide.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
-
-                    {/* Row 3 */}
-                    <div className="flex flex-wrap justify-center gap-12">
-                        {[
-                            { name: "Avin Nayeri", role: "Bio-Tech Concept", img: "avin.jpg" },
-                            { name: "Marco Lepore", role: "Documentation", img: "marco.jpg" },
-                            { name: "Yookyung Jun", role: "Visual Designer", img: "jun.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
-                </section>
+                                {/* Row 2 */}
+                                <div className="flex flex-wrap justify-center gap-12 mb-12">
+                                    {[
+                                        { name: "Pauline Sluijs", role: "Curator of Events", img: "pau.jpg" },
+                                        { name: "Louison Jacoby", role: "Event Designer", img: "louison.jpg" },
+                                        { name: "Tom Hoevers", role: "Scalability", img: "tom.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
 
 
-                {/* Platform Section */}
-                <section className="mb-24">
-                    <motion.h2 
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-3xl font-bold text-center mb-12 text-yellow-400"
-                    >
-                        Platform
-                    </motion.h2>
+                                {/* Row 3 */}
+                                <div className="flex flex-wrap justify-center gap-12">
+                                    {[
+                                        { name: "Aaron Dantuma", role: "Osaka Producer", img: "aron.jpg" },
+                                        { name: "Wouter Schuit", role: "Osaka Curator", img: "wouter.jpg" },
+                                        { name: "Famke Gerritsen", role: "Osaka Programmer", img: "famke.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+                            </section>
 
-                    {/* Row 1 */}
-                    <div className="flex flex-wrap justify-center gap-12 mb-12">
-                        {[
-                            { name: "Simon Leclercq", role: "Concept Designer", img: "simon.jpg" },
-                            { name: "Connor Sesink Clee", role: "Concept Artist", img: "connor.jpg" },
-                            { name: "Amarte Artist", role: "Topic Specialist", img: "logo_white.png" }, 
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
 
-                    {/* Row 2 */}
-                    <div className="flex flex-wrap justify-center gap-12 mb-12">
-                        {[
-                            { name: "Radu Mihălăchiuță", role: "Fabrication Software", img: "me.jpg" },
-                            { name: "Tomas Steenman", role: "Fabrication Hardware", img: "tomas.jpg" },
-                            { name: "Marcos Francos", role: "Fabrication Hardware", img: "marcos.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
+                            {/* New Media Section */}
+                            <section className="mb-24">
+                                <motion.h2 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="text-3xl font-bold text-center mb-12 text-pink-500"
+                                >
+                                    New Media
+                                </motion.h2>
 
-                    {/* Row 3 */}
-                    <div className="flex flex-wrap justify-center gap-12">
-                        {[
-                            { name: "Arianne Riegen", role: "Documentation", img: "ari.jpg" },
-                            { name: "Yi Quan", role: "Science Communication", img: "yi.jpg" },
-                        ].map((member, idx) => (
-                            <TeamMember key={idx} member={member} delay={idx * 0.1} />
-                        ))}
-                    </div>
-                </section>
+                                {/* Row 1 */}
+                                <div className="flex flex-wrap justify-center gap-12 mb-12">
+                                    {[
+                                        { name: "Nora Donders", role: "Chief Fabrication", img: "nora.jpg" },
+                                        { name: "Floor van Heist", role: "Mechanical Engineer", img: "floor.jpg" },
+                                        { name: "Jeroen Wesselingh", role: "Mechanical Engineer", img: "jeron.jpg" },
+                                        { name: "Jochem Broshuis", role: "Embedded Engineer", img: "jochem.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+
+                                {/* Row 2 */}
+                                <div className="flex flex-wrap justify-center gap-12 mb-12">
+                                    {[
+                                        { name: "Emilie Benneker", role: "Chief Concept", img: "emily.jpg" },
+                                        { name: "Tamar Hollman", role: "Concept Designer", img: "tamar.jpg" },
+                                        { name: "Davide Forlani", role: "Concept Artist", img: "davide.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+
+                                {/* Row 3 */}
+                                <div className="flex flex-wrap justify-center gap-12">
+                                    {[
+                                        { name: "Avin Nayeri", role: "Bio-Tech Concept", img: "avin.jpg" },
+                                        { name: "Marco Lepore", role: "Documentation", img: "marco.jpg" },
+                                        { name: "Yookyung Jun", role: "Visual Designer", img: "jun.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+                            </section>
+
+
+                            {/* Platform Section */}
+                            <section className="mb-24">
+                                <motion.h2 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="text-3xl font-bold text-center mb-12 text-yellow-400"
+                                >
+                                    Platform
+                                </motion.h2>
+
+                                {/* Row 1 */}
+                                <div className="flex flex-wrap justify-center gap-12 mb-12">
+                                    {[
+                                        { name: "Simon Leclercq", role: "Concept Designer", img: "simon.jpg" },
+                                        { name: "Connor Sesink Clee", role: "Concept Artist", img: "connor.jpg" },
+                                        { name: "Amarte Artist", role: "Topic Specialist", img: "logo_white.png" }, 
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+
+                                {/* Row 2 */}
+                                <div className="flex flex-wrap justify-center gap-12 mb-12">
+                                    {[
+                                        { name: "Radu Mihălăchiuță", role: "Fabrication Software", img: "me.jpg" },
+                                        { name: "Tomas Steenman", role: "Fabrication Hardware", img: "tomas.jpg" },
+                                        { name: "Marcos Francos", role: "Fabrication Hardware", img: "marcos.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+
+                                {/* Row 3 */}
+                                <div className="flex flex-wrap justify-center gap-12">
+                                    {[
+                                        { name: "Arianne Riegen", role: "Documentation", img: "ari.jpg" },
+                                        { name: "Yi Quan", role: "Science Communication", img: "yi.jpg" },
+                                    ].map((member, idx) => (
+                                        <TeamMember key={idx} member={member} delay={idx * 0.1} />
+                                    ))}
+                                </div>
+                            </section>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
             </main>
         </div>

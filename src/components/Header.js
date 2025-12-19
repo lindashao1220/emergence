@@ -29,60 +29,58 @@ export default function Header() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Logo */}
-          <Link href="/" className="mr-6 flex-shrink-0">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Image src="/logo_white.png" alt="Logo" width={40} height={40} className="w-10 h-10" />
-            </motion.div>
-          </Link>
+          {/* Logo & About Dropdown */}
+          <div 
+            className="relative group mr-6 flex-shrink-0"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <Link href="/" className="flex items-center space-x-3">
+              <motion.div
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Image src="/logo_white.png" alt="Logo" width={40} height={40} className="w-10 h-10" />
+              </motion.div>
+              <span className="text-white font-medium hover:text-pink-400 transition-colors">About</span>
+            </Link>
+
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  className="absolute top-full left-0 mt-4 w-40 bg-black/90 border border-pink-500/30 rounded-xl overflow-hidden backdrop-blur-md shadow-xl"
+                >
+                  <div className="py-1">
+                    <Link href="/#team" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
+                      Team
+                    </Link>
+                    <Link href="/#mission" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
+                      Mission
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* Desktop Nav Items */}
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium ml-auto">
-            <div 
-              className="relative group"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
-            >
-              <button className="flex items-center space-x-1 text-white hover:text-pink-400 transition-colors">
-                <span>About</span>
-                <span className="text-xs">▼</span>
-              </button>
-              
-              <AnimatePresence>
-                {isDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-40 bg-black/90 border border-pink-500/30 rounded-xl overflow-hidden backdrop-blur-md shadow-xl"
-                  >
-                    <div className="py-1">
-                      <Link href="/about/team" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
-                        Team
-                      </Link>
-                      <Link href="/#mission" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
-                        Mission
-                      </Link>
-                      <Link href="/about/partners" className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-pink-900/30 transition-colors">
-                        Partners
-                      </Link>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             <Link href="/contact" className="text-white hover:text-pink-400 transition-colors">
               Contact
             </Link>
 
-            <Link href="/projects" className="text-yellow-400 hover:text-yellow-300 transition-colors">
+            <Link href="/projects" className="text-white hover:text-yellow-300 transition-colors">
               Projects
             </Link>
-            
+
+            <Link href="/partners" className="text-white hover:text-yellow-300 transition-colors">
+              Partners
+            </Link>
+
             <Link href="/recruit" className="bg-yellow-400 hover:bg-yellow-300 text-black px-4 py-1.5 rounded-full font-bold transition-colors shadow-[0_0_10px_rgba(250,204,21,0.4)]">
               Join Us
             </Link>
@@ -113,13 +111,13 @@ export default function Header() {
               <div className="bg-black/90 backdrop-blur-md border border-pink-500/30 rounded-2xl p-6 shadow-2xl flex flex-col space-y-4 text-center">
                  <div className="flex flex-col space-y-2">
                     <p className="text-pink-400 font-bold border-b border-gray-700 pb-2 mb-2">About</p>
-                    <Link href="/about/team" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Team</Link>
+                    <Link href="/#team" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Team</Link>
                     <Link href="/#mission" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Mission</Link>
-                    <Link href="/about/partners" onClick={toggleMobileMenu} className="text-gray-300 hover:text-white">Partners</Link>
                  </div>
                  
                  <Link href="/contact" onClick={toggleMobileMenu} className="text-white text-lg hover:text-pink-400 font-medium border-t border-gray-800 pt-4">Contact</Link>
                  <Link href="/projects" onClick={toggleMobileMenu} className="text-yellow-400 text-lg hover:text-yellow-300 font-medium">Projects</Link>
+                 <Link href="/partner" onClick={toggleMobileMenu} className="text-white text-lg hover:text-pink-400 font-medium border-t border-gray-800 pt-4">Partners</Link>
                  
                  <div className="flex flex-col gap-3 pt-4 border-t border-gray-800">
                     <Link href="/recruit" onClick={toggleMobileMenu} className="bg-yellow-400 text-black py-2 rounded-full font-bold shadow-[0_0_10px_rgba(250,204,21,0.4)]">Join Us</Link>
