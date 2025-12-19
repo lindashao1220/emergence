@@ -26,7 +26,7 @@ function Card({ title, content, hueA, hueB, i }) {
       <div style={{ ...splash, background }} />
       <motion.div style={card} variants={cardVariants} className="card">
         <h2 className="text-2xl font-bold mb-4">{title}</h2>
-        <div className="text-sm leading-relaxed overflow-y-auto pr-2 scrollbar-hide">
+        <div className="text-sm leading-relaxed overflow-y-auto pr-2 scrollbar-hide text-black">
           {content}
         </div>
       </motion.div>
@@ -39,7 +39,7 @@ const cardVariants = {
     y: 300,
   },
   onscreen: {
-    y: 50,
+    y: 10,
     rotate: -10,
     transition: {
       type: "spring",
@@ -56,9 +56,8 @@ const hue = (h) => `hsl(${h}, 100%, 50%)`;
  */
 
 const container = {
-  margin: "100px auto",
+  margin: "160px auto 100px auto", // Increased top margin
   maxWidth: 500,
-  paddingBottom: 100,
   width: "100%",
 };
 
@@ -69,7 +68,7 @@ const cardContainer = {
   alignItems: "center",
   position: "relative",
   paddingTop: 20,
-  marginBottom: -120,
+  marginBottom: -60,
 };
 
 const splash = {
@@ -82,7 +81,7 @@ const splash = {
 };
 
 const card = {
-  width: 300,
+  width: 360,
   height: 430,
   display: "flex",
   flexDirection: "column",
