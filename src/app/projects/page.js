@@ -18,7 +18,7 @@ export default function Projects() {
     return (
         <div className="bg-black text-white min-h-screen flex flex-col">
             {/* Fixed Header */}
-            <header className="fixed top-0 left-0 w-full flex justify-between items-center p-6 bg-black z-10">
+            {/* <header className="fixed top-0 left-0 w-full flex justify-between items-center p-6 bg-black z-10">
                 <div className="text-2xl font-bold">
                     <Image src="/logo_white.png" alt="Logo" width={50} height={50} />
                 </div>
@@ -28,7 +28,7 @@ export default function Projects() {
                     <a href="/projects" className="bg-yellow-400 text-black px-4 py-2 rounded-full">Projects</a>
                     <a href="#" className="bg-pink-600 text-white px-4 py-2 rounded-full">PKB</a>
                 </nav>
-            </header>
+            </header> */}
 
             {/* Main Content */}
             <main className="pt-28 px-8">

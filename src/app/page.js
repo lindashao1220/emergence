@@ -29,7 +29,7 @@ export default function Home() {
                         className="relative z-10 max-w-4xl"
                     >
                         <h2 className="text-white text-4xl md:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-2xl">
-                            Developing <span className="text-pink-500">New Media Art</span> to Reflect on <span className="text-yellow-400">Complex Technologies</span>
+                            Developing <span className="text-pink-500">New Media Art</span> to Reflect on <span className="text-yellow-300">Complex Technologies</span>
                         </h2>
                     </motion.div>
                 </section>
